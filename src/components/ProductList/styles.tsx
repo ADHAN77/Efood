@@ -4,7 +4,7 @@ import { Cores } from '../../styles';
 export const ProductGrid = styled.div`
     display: grid;
     grid-template-columns: repeat(3, 1fr); 
-    gap: 34px;
+    gap: 32px;
     margin: 20px auto; 
     max-width: 1024px;
     width: 100%;

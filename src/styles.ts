@@ -26,7 +26,7 @@ export const Container = styled.div`
     margin: 0 auto;
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    gap: 24px;
+    gap: 48px 80px;
     justify-content: center;
     padding: 20px;
 `
