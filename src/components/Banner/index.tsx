@@ -1,15 +1,15 @@
 import React from 'react';
 import { BannerContainer, Categoria, ContentContainer, RestauranteNome } from './styles';
-import bannerImage from '../../assets/images/banner.png';
 
 interface BannerProps {
     categoria: string;
     nomeRestaurante: string;
+    fotoRestaurante: string; // Nova propriedade para a foto do restaurante
 }
 
-const Banner: React.FC<BannerProps> = ({ categoria, nomeRestaurante }) => {
+const Banner: React.FC<BannerProps> = ({ categoria, nomeRestaurante, fotoRestaurante }) => {
     return (
-        <BannerContainer style={{ backgroundImage: `url(${bannerImage})` }}>
+        <BannerContainer style={{ backgroundImage: `url(${fotoRestaurante})` }}>
             <ContentContainer>
                 <Categoria>{categoria}</Categoria>
                 <RestauranteNome>{nomeRestaurante}</RestauranteNome>

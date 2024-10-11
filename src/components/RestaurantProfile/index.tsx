@@ -15,26 +15,27 @@ import Rating from '../Rating';
 import { useNavigate } from 'react-router-dom';
 
 interface RestaurantProfileProps {
+    id: number;
     image: string;
     highlight: string;
     title: string;
     description: string;
     rating: number;
-    destaque?: string;
+    destaque?: boolean;
 }
 
-const RestaurantProfile: React.FC<RestaurantProfileProps> = ({ image, highlight, title, description, rating, destaque }) => {
+const RestaurantProfile: React.FC<RestaurantProfileProps> = ({ id, image, highlight, title, description, rating, destaque }) => {
     const navigate = useNavigate();
 
     const handleMoreInfoClick = () => {
-        navigate('/Perfil');
+        navigate(`/Perfil/${id}`);
     };
 
     return (
         <ProfileContainer>
             <RestaurantImage src={image} alt={title} />
             <CategoryContainer>
-                {destaque && <Highlight>{destaque}</Highlight>}
+                {destaque && <Highlight>Destaque da semana</Highlight>}
                 <Category>{highlight}</Category>
             </CategoryContainer>
             <Content>
@@ -52,3 +53,4 @@ const RestaurantProfile: React.FC<RestaurantProfileProps> = ({ image, highlight,
 };
 
 export default RestaurantProfile;
+

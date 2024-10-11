@@ -1,58 +1,53 @@
-
+import React, { useState } from 'react';
 import { Card, CardImage, CardTitle, CardDescription, CardButton, ProductGrid } from './styles';
-import pizza from '../../assets/images/pizza.png'
+import Modal from '../Modal';
 
-const ProductList = () => {
-    const products = [
-        {
-            id: 1,
-            image: pizza,
-            title: 'Pizza Marguerita',
-            description: 'A clássica Marguerita: molho de tomate suculento, mussarela derretida, manjericão fresco e um toque de azeite. Sabor e simplicidade!',
-        },
-        {
-            id: 2,
-            image: pizza,
-            title: 'Pizza Marguerita',
-            description: 'A clássica Marguerita: molho de tomate suculento, mussarela derretida, manjericão fresco e um toque de azeite. Sabor e simplicidade!',
-        },
-        {
-            id: 3,
-            image: pizza,
-            title: 'Pizza Marguerita',
-            description: 'A clássica Marguerita: molho de tomate suculento, mussarela derretida, manjericão fresco e um toque de azeite. Sabor e simplicidade!',
-        },
-        {
-            id: 4,
-            image: pizza,
-            title: 'Pizza Marguerita',
-            description: 'A clássica Marguerita: molho de tomate suculento, mussarela derretida, manjericão fresco e um toque de azeite. Sabor e simplicidade!',
-        },
-        {
-            id: 5,
-            image: pizza,
-            title: 'Pizza Marguerita',
-            description: 'A clássica Marguerita: molho de tomate suculento, mussarela derretida, manjericão fresco e um toque de azeite. Sabor e simplicidade!',
-        },
-        {
-            id: 6,
-            image: pizza,
-            title: 'Pizza Marguerita',
-            description: 'A clássica Marguerita: molho de tomate suculento, mussarela derretida, manjericão fresco e um toque de azeite. Sabor e simplicidade!',
-        },
-    ];
+interface Product {
+    id: number;
+    foto: string;
+    nome: string;
+    descricao: string;
+    preco: number;
+    porcao: string;
+}
+
+interface ProductListProps {
+    products: Product[];
+}
+
+const ProductList: React.FC<ProductListProps> = ({ products }) => {
+    const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
+    const [isModalOpen, setIsModalOpen] = useState(false);
+
+    const handleMoreDetailsClick = (product: Product) => {
+        setSelectedProduct(product);
+        setIsModalOpen(true);
+    };
+
+    const handleCloseModal = () => {
+        setIsModalOpen(false);
+    };
 
     return (
-        <ProductGrid>
-            {products.map((product) => (
-                <Card key={product.id}>
-                    <CardImage src={product.image} alt={product.title} />
-                    <CardTitle>{product.title}</CardTitle>
-                    <CardDescription>{product.description}</CardDescription>
-                    <CardButton>Adicionar ao carrinho</CardButton>
-                </Card>
-            ))}
-        </ProductGrid>
+        <>
+            <ProductGrid>
+                {products.map((product) => (
+                    <Card key={product.id}>
+                        <CardImage src={product.foto} alt={product.nome} />
+                        <CardTitle>{product.nome}</CardTitle>
+                        <CardDescription>{product.descricao}</CardDescription>
+                        <CardButton onClick={() => handleMoreDetailsClick(product)}>Mais detalhes</CardButton>
+                    </Card>
+                ))}
+            </ProductGrid>
+
+            {isModalOpen && selectedProduct && (
+                <Modal 
+                    product={selectedProduct} 
+                    onClose={handleCloseModal} 
+                />
+            )}
+        </>
     );
 };
 

@@ -8,7 +8,6 @@ export const ProductGrid = styled.div`
     margin: 20px auto; 
     max-width: 1024px;
     width: 100%;
-    display: grid;
     justify-content: center;
     padding: 20px;
     margin-bottom: 100px;
@@ -43,9 +42,39 @@ export const CardDescription = styled.p`
     font-family: Roboto;
     font-size: 14px;
     font-weight: 400;
-    line-height: 22px;
+    line-height: 18px; 
     text-align: left;
     color: ${Cores.bege2}; 
+    max-height: 60px;
+    overflow-y: auto; 
+    margin: 0; 
+    padding-right: 8px;
+    
+    ::-webkit-scrollbar {
+        width: 3px;
+    }
+    
+    ::-webkit-scrollbar-thumb {
+        background-color: ${Cores.bege2};
+        border-radius: 10px;
+    }
+
+    ::-webkit-scrollbar-track {
+        background-color: transparent;
+    }
+
+    &:hover {
+        ::-webkit-scrollbar {
+            width: 6px; 
+        }
+    }
+
+    scrollbar-width: thin;
+    scrollbar-color: ${Cores.bege2} transparent;
+
+    &:hover {
+        scrollbar-width: auto;
+    }
 `;
 
 export const CardButton = styled.button`
@@ -57,4 +86,5 @@ export const CardButton = styled.button`
     color: ${Cores.salmao}; 
     border: none;  
     cursor: pointer; 
+    align-self: flex-end;
 `;

@@ -18,7 +18,7 @@ const router = createBrowserRouter([
         ),
     },
     {
-        path: '/Perfil',
+        path: '/Perfil/:id',
         element: <PerfilPage />,
     },
 ]);

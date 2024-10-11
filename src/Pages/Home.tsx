@@ -1,10 +1,10 @@
 import React from 'react';
-import RestaurantProfileList from '../components/RestaurantProfileList';
+import RestaurantList from '../components/RestaurantProfileList';
 
 const Home: React.FC = () => {
     return (
         <div>
-            <RestaurantProfileList />
+            <RestaurantList />
         </div>
     );
 };
