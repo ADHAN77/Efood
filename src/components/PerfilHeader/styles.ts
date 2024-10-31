@@ -59,4 +59,5 @@ export const CartText = styled.span`
     width: 256px;
     height: 21px;
     opacity: 0.8;
+    cursor: pointer;
 `;

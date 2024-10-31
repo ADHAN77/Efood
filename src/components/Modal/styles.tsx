@@ -22,18 +22,6 @@ export const ModalContent = styled.div`
     padding: 32px;
     position: relative; 
     box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.2); 
-    animation: float 0.3s ease-out; 
-
-    @keyframes float {
-        from {
-            transform: translateY(-20px);
-            opacity: 0;
-        }
-        to {
-            transform: translateY(0);
-            opacity: 1;
-        }
-    }
 `;
 
 export const ModalImage = styled.img`

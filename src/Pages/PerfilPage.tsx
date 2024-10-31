@@ -3,6 +3,7 @@ import PerfilHeader from '../components/PerfilHeader';
 import Footer from '../components/Footer';
 import Banner from '../components/Banner';
 import ProductList from '../components/ProductList';
+import Sidebar from '../components/Sidebar';
 import { useParams } from 'react-router-dom';
 
 interface Cardapio {
@@ -29,8 +30,35 @@ const PerfilPage: React.FC = () => {
     const { id: restaurantId } = useParams<{ id: string }>();
     const [restaurantData, setRestaurantData] = useState<RestaurantData | null>(null);
     const [loading, setLoading] = useState<boolean>(true);
+    const [cartItems, setCartItems] = useState<Cardapio[]>([]);
+    const [isSidebarOpen, setIsSidebarOpen] = useState<boolean>(false);
+
+    const addToCart = (product: Cardapio) => {
+        const updatedCart = [...cartItems, product];
+        setCartItems(updatedCart);
+        localStorage.setItem('cartItems', JSON.stringify(updatedCart));
+    };
+
+    const removeFromCart = (id: number) => {
+        const updatedCart = cartItems.filter(item => item.id !== id);
+        setCartItems(updatedCart);
+        localStorage.setItem('cartItems', JSON.stringify(updatedCart));
+    };
+
+    const handleCartClick = () => {
+        setIsSidebarOpen(true);
+    };
+
+    const closeSidebar = () => {
+        setIsSidebarOpen(false);
+    };
 
     useEffect(() => {
+        const storedCart = localStorage.getItem('cartItems');
+        if (storedCart) {
+            setCartItems(JSON.parse(storedCart));
+        }
+
         const fetchRestaurantData = async () => {
             try {
                 const response = await fetch(`https://fake-api-tau.vercel.app/api/efood/restaurantes/${restaurantId}`);
@@ -52,7 +80,7 @@ const PerfilPage: React.FC = () => {
 
     return (
         <>
-            <PerfilHeader />
+            <PerfilHeader cartCount={cartItems.length} onCartClick={handleCartClick} />
             {restaurantData && (
                 <>
                     <Banner
@@ -62,10 +90,18 @@ const PerfilPage: React.FC = () => {
                     />
                     <ProductList
                         products={restaurantData.cardapio}
+                        addToCart={addToCart}
                     />
                 </>
             )}
             <Footer />
+            {isSidebarOpen && (
+                <Sidebar 
+                    cartItems={cartItems} 
+                    onClose={closeSidebar} 
+                    removeFromCart={removeFromCart}
+                />
+            )}
         </>
     );
 };

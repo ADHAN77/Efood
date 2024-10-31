@@ -12,9 +12,15 @@ interface ModalProps {
         porcao: string;
     };
     onClose: () => void;
+    addToCart: () => void;
 }
 
-const Modal: React.FC<ModalProps> = ({ product, onClose }) => {
+const Modal: React.FC<ModalProps> = ({ product, onClose, addToCart }) => {
+    const handleAddToCart = () => {
+        addToCart();
+        onClose();
+    };
+
     return (
         <ModalContainer>
             <ModalContent>
@@ -26,7 +32,9 @@ const Modal: React.FC<ModalProps> = ({ product, onClose }) => {
                     <ModalTitle>{product.nome}</ModalTitle>
                     <ModalDescription>{product.descricao}</ModalDescription>
                     <ModalPorcao>Serve: {product.porcao}</ModalPorcao>
-                    <ModalButton>Adicionar ao carrinho - R${product.preco}</ModalButton>
+                    <ModalButton onClick={handleAddToCart}>
+                        Adicionar ao carrinho - R${product.preco}
+                    </ModalButton>
                 </ModalTextContainer>
             </ModalContent>
         </ModalContainer>
@@ -34,3 +42,4 @@ const Modal: React.FC<ModalProps> = ({ product, onClose }) => {
 };
 
 export default Modal;
+

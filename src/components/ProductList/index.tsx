@@ -1,3 +1,4 @@
+// src/components/ProductList/index.tsx
 import React, { useState } from 'react';
 import { Card, CardImage, CardTitle, CardDescription, CardButton, ProductGrid } from './styles';
 import Modal from '../Modal';
@@ -13,9 +14,10 @@ interface Product {
 
 interface ProductListProps {
     products: Product[];
+    addToCart: (product: Product) => void;
 }
 
-const ProductList: React.FC<ProductListProps> = ({ products }) => {
+const ProductList: React.FC<ProductListProps> = ({ products, addToCart }) => {
     const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
     const [isModalOpen, setIsModalOpen] = useState(false);
 
@@ -45,6 +47,7 @@ const ProductList: React.FC<ProductListProps> = ({ products }) => {
                 <Modal 
                     product={selectedProduct} 
                     onClose={handleCloseModal} 
+                    addToCart={() => addToCart(selectedProduct)} // adiciona o produto específico ao carrinho
                 />
             )}
         </>
