@@ -53,6 +53,11 @@ const PerfilPage: React.FC = () => {
         setIsSidebarOpen(false);
     };
 
+    const clearCart = () => {
+        setCartItems([]); // Limpa o estado do carrinho
+        localStorage.removeItem('cartItems'); // Remove os itens do carrinho no localStorage
+    };
+
     useEffect(() => {
         const storedCart = localStorage.getItem('cartItems');
         if (storedCart) {
@@ -100,6 +105,7 @@ const PerfilPage: React.FC = () => {
                     cartItems={cartItems} 
                     onClose={closeSidebar} 
                     removeFromCart={removeFromCart}
+                    clearCart={clearCart}
                 />
             )}
         </>
