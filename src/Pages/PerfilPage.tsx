@@ -3,7 +3,7 @@ import PerfilHeader from '../components/PerfilHeader';
 import Footer from '../components/Footer';
 import Banner from '../components/Banner';
 import ProductList from '../components/ProductList';
-import Sidebar from '../components/Sidebar';
+import Sidebar from '../components/Sidebar/cart';
 import { useParams } from 'react-router-dom';
 
 interface Cardapio {
@@ -45,17 +45,17 @@ const PerfilPage: React.FC = () => {
         localStorage.setItem('cartItems', JSON.stringify(updatedCart));
     };
 
+    const clearCart = () => {
+        setCartItems([]); // Limpa o carrinho
+        localStorage.removeItem('cartItems'); // Remove os itens do carrinho do localStorage
+    };
+
     const handleCartClick = () => {
         setIsSidebarOpen(true);
     };
 
     const closeSidebar = () => {
         setIsSidebarOpen(false);
-    };
-
-    const clearCart = () => {
-        setCartItems([]); // Limpa o estado do carrinho
-        localStorage.removeItem('cartItems'); // Remove os itens do carrinho no localStorage
     };
 
     useEffect(() => {
